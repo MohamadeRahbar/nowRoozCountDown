@@ -1,97 +1,111 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NowRooz-Counte | روز شمار نوروز</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<html dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NowRooz-Counte | روز شمار نوروز</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    body {
-      color: #444;
-    }
+      body {
+        color: #444;
+        font-family: IRANSans;
+      }
 
-    .parent {
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #ddd;
-    }
-    .box {
-      width: 600px;
-      text-align: center;
-      font-family: tahoma;
-      padding: 50px;
-      border-radius: 20px;
-      background-color: #eee;
-      box-shadow: 0 0px 5px 2px #fff , 0 3px 2px 5px #aaa , 0 3px 20px 3px #888;
-      cursor: progress;
-    }
-
-    .counter {
-      floa
-    }
-
-    span {
-      font-size: 20px;
-      display: inline-block;
-      padding-top: 20px;
-      
-    }
+      @font-face {
+        font-family: IRANSans;
+        src: url('/fonts/IRANSansWeb(FaNum).eot');
+        src: url('/fonts/IRANSansWeb(FaNum).eot?#iefix') format('embedded-opentype'), /* IE6-8 */
+        url('/fonts/IRANSansWeb(FaNum).woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
+        url('/fonts/IRANSansWeb(FaNum).woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+        url('/fonts/IRANSansWeb(FaNum).ttf') format('truetype');
+        
+}
 
 
-  </style>
-</head>
-<body>
-  
-  <div class="parent">
-    <div class="box">
-      <h3 style="padding-bottom: 20px; font-size: 30px; border-bottom: 1px solid #ddd;">
-        تا تحویل سال نو
-      </h3>
-      <div class="counter">
-      <span id="count-time"></span>
+      .parent {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #ddd;
+      }
+      .box {
+        width: 600px;
+        text-align: center;
+        padding: 50px;
+        border-radius: 20px;
+        background-color: #eee;
+        box-shadow: 0 0px 5px 2px #fff, 0 3px 2px 5px #aaa, 0 3px 20px 3px #888;
+        cursor: progress;
+      }
 
+      span {
+        font-size: 20px;
+        display: inline-block;
+        padding-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="parent">
+      <div class="box">
+        <h3
+          style="
+            padding-bottom: 20px;
+            font-size: 30px;
+            border-bottom: 1px solid #ddd;
+          "
+        >
+          تا تحویل سال نو
+        </h3>
+        <div class="counter">
+          <span id="count-down"></span>
+        </div>
       </div>
-      
-      
     </div>
-  </div>
-  
 
+    <script>
+      // today time
+      
+      nowroozCounter = () => {
+      var today = new Date().getTime();
 
-  <script>
+      // nowrooz time
+      var nowrooz = new Date(2023, 2, 21, 00, 54, 28).getTime();
 
-    // today time 
+      // time difference
+      var difference = nowrooz - today;
 
-    var today = new Date().getTime();
+      // calculating each seconds minutes hours and days
 
-    // nowrooz time 
-    var nowrooz = new Date(2023,2,21,00,54,28).getTime();
-    
-    // time difference 
-    var difference = nowrooz - today ;
+      var days = Math.trunc(difference / (3600000 * 24));
+      var hours = Math.floor((difference % (3600000 * 24)) / 3600000);
+      var minutes = Math.floor((difference % 3600000) / 60000);
+      var seconds = Math.floor((difference % 60000) / 1000);
 
-    // calculating seconds minutes hours and days 
+      // finall job for show Count-Down
+      document.getElementById("count-down").innerHTML = `${days} روز و ${hours} ساعت و ${minutes} دقیقه و ${seconds} ثانیه مانده است`;
+      }
 
-    var days = (difference / (3600000*24))
-    var hours = 
-    var seconds = difference / 1000 ;
-    var minutes = seconds / 
-    1201688145
-    console.log(seconds)
+      // for repeat & update per each seconds 
+      setInterval(function() {
+        nowroozCounter();
+      },1000)
 
+      // for prevent over timing and discard counting after due date
+      // all of this count-down was made by mr.Alpha 
 
+      if (difference < 0) {
+        document.getElementById("count-down").innerHTML = `سال 1402 مبارک`;
+      }
 
-
-
-  </script>
-</body>
+    </script>
+  </body>
 </html>
