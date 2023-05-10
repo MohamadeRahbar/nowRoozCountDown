@@ -20,9 +20,8 @@
       @font-face {
         font-family: IRANSans;
         src: url('/fonts/IRANSansWeb(FaNum).eot');
-        src: url('/fonts/IRANSansWeb(FaNum).eot?#iefix') format('embedded-opentype'), /* IE6-8 */
-        url('/fonts/IRANSansWeb(FaNum).woff2') format('woff2'), /* FF39+,Chrome36+, Opera24+*/
-        url('/fonts/IRANSansWeb(FaNum).woff') format('woff'), /* FF3.6+, IE9, Chrome6+, Saf5.1+*/
+        src: url('/fonts/IRANSansWeb(FaNum).eot?#iefix') format('embedded-opentype'),        url('/fonts/IRANSansWeb(FaNum).woff2') format('woff2'), 
+        url('/fonts/IRANSansWeb(FaNum).woff') format('woff'), 
         url('/fonts/IRANSansWeb(FaNum).ttf') format('truetype');
         
 }
@@ -72,40 +71,40 @@
     </div>
 
     <script>
+
       // today time
+      nowRoozCounter = () => {
+        var today = new Date().getTime();
+
+        // nowrooz time , can change every years 
+        var nowrooz = new Date(2024, 2, 20, 06,36,00).getTime();
+
+        // time difference
+        var difference = nowrooz - today;
+        
+        // calculating each seconds minutes hours and days 
+        var days = Math.trunc(difference / (3600000 * 24));
+        var hours = Math.floor((difference % (3600000 * 24)) / 3600000);
+        var minutes = Math.floor((difference % 3600000) / 60000);
+        var seconds = Math.trunc((difference % 60000) / 1000);
+       
+        // finall 
+        document.getElementById("count-down").innerHTML = `${days} روز و ${hours} ساعت و ${minutes} دقیقه و ${seconds} ثانیه مانده است`;
+        
+        // prevent over timing and discard counting after due date
+        if (difference < 0) {
+        document.getElementById("count-down").innerHTML = `سال نو مبارک`;
+      }}
+        // for repeat & update per each seconds 
+        setInterval(function() {
+          nowRoozCounter();
+        },1000)
+
       
-      nowroozCounter = () => {
-      var today = new Date().getTime();
+      // this count-down was made by {Mr.Alpha} 
+      // follow for more on github : @mohamadeRahbar
 
-      // nowrooz time
-      var nowrooz = new Date(2023, 2, 21, 00, 54, 28).getTime();
-
-      // time difference
-      var difference = nowrooz - today;
-
-      // calculating each seconds minutes hours and days
-
-      var days = Math.trunc(difference / (3600000 * 24));
-      var hours = Math.floor((difference % (3600000 * 24)) / 3600000);
-      var minutes = Math.floor((difference % 3600000) / 60000);
-      var seconds = Math.floor((difference % 60000) / 1000);
-
-      // finall job for show Count-Down
-      document.getElementById("count-down").innerHTML = `${days} روز و ${hours} ساعت و ${minutes} دقیقه و ${seconds} ثانیه مانده است`;
-      }
-
-      // for repeat & update per each seconds 
-      setInterval(function() {
-        nowroozCounter();
-      },1000)
-
-      // for prevent over timing and discard counting after due date
-      // all of this count-down was made by mr.Alpha 
-
-      if (difference < 0) {
-        document.getElementById("count-down").innerHTML = `سال 1402 مبارک`;
-      }
-
+      
     </script>
   </body>
 </html>
