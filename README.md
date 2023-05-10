@@ -1,2 +1,2 @@
 # nowRoozCountDown
-a countdown for nowrooz 1402 !!
+A countdown for Persian New Years (NowRooz) 
